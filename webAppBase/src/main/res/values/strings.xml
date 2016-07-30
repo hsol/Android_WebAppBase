@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">CNTT WebAppBase</string>
+    <string name="app_prefix">cnttwebapp</string>
+    <string name="app_host">base</string>
+
+    <string name="log_develop">[Logger:D]</string>
+    <string name="log_info">[Logger:I]</string>
+    <string name="log_error">[Logger:E]</string>
+    <string name="log_warning">[Logger:W]</string>
+    <string name="log_verbose">[Logger:V]</string>
+
+    <string name="VER">version_group</string>
+    <string name="VER_CURRENT">current_version</string>
+    <string name="VER_LATEST">latest_version</string>
+    <string name="BADGE_COUNT">badge_count</string>
+
+    <string name="progress_image_view">Progress image view</string>
+    <string name="splash_image_view">splash image view</string>
+
+    <string name="fragment_add_complete">Fragment 추가 완료</string>
+    <string name="fragment_replace_complete">Fragment 교체 완료</string>
+    <string name="fragment_remove_complete">Fragment 삭제 완료</string>
+    <string name="fragment_replace_warning">Fragment 가 비어있습니다. 먼저 Fragment 를 추가해주세요</string>
+
+    <string name="error_no_network">네트워크에 연결되어 있지 않습니다.</string>
+</resources>
