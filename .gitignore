@@ -35,6 +35,7 @@ captures/
 # Intellij
 *.iml
 .idea/workspace.xml
+.idea/
 
 # Keystore files
 *.jks
@@ -43,3 +44,12 @@ build.gradle
 libs/
 proguard-rules.pro
 src/
+.gitattributes
+documents/
+fingerpush_3.0.3/
+gradle.properties
+gradle/
+gradlew
+gradlew.bat
+settings.gradle
+webAppBase/
