@@ -1,4 +1,4 @@
-package kr.cnttech.webappbase.common;
+package kr.cnttech.webappbase.base;
 
 import android.app.PendingIntent;
 import android.content.Context;
@@ -12,13 +12,14 @@ import com.fingerpush.android.FingerPushManager;
 
 import java.util.Iterator;
 
+import kr.cnttech.webappbase.common.MainActivity;
 import kr.cnttech.webappbase.lib.Utils;
 
 /**
  * Created by hansollim on 2016-07-28.
  */
-public class IntentService extends FingerPushListener {
-    private static final String TAG = "IntentService";
+public class BaseIntentService extends FingerPushListener {
+    private static final String TAG = "BaseIntentService";
     FingerPushManager manager;
 
     @Override
@@ -31,7 +32,7 @@ public class IntentService extends FingerPushListener {
         }
 
         try {
-            manager = FingerPushManager.getInstance(IntentService.this);
+            manager = FingerPushManager.getInstance(BaseIntentService.this);
 
             setNotification(data);
 
@@ -42,12 +43,12 @@ public class IntentService extends FingerPushListener {
 
     private void setNotification(final Bundle data) {
 
-        Intent intent = new Intent(IntentService.this, MainActivity.class);
+        Intent intent = new Intent(BaseIntentService.this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
-        PendingIntent pi = PendingIntent.getActivity(IntentService.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pi = PendingIntent.getActivity(BaseIntentService.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        FingerNotification noti = new FingerNotification(IntentService.this);
+        FingerNotification noti = new FingerNotification(BaseIntentService.this);
         noti.setColor(Color.BLUE);
         noti.setNofiticaionIdentifier((int) System.currentTimeMillis());
         noti.showNotification(data, pi);

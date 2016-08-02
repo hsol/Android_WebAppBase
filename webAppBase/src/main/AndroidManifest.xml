@@ -37,7 +37,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name="kr.cnttech.webappbase.common.IntentService">
+        <service android:name=".base.BaseIntentService">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>

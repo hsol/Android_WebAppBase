@@ -28,7 +28,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onFirstLaunch() {
-        Toast.makeText(mContext, "처음켰네요?", Toast.LENGTH_LONG).show();
+        Utils.Logger(mContext, "D", getString(R.string.when_first_load));
     }
 
     @Override

@@ -2,22 +2,15 @@ package kr.cnttech.webappbase.common;
 
 import android.app.AlertDialog;
 import android.app.DownloadManager;
-import android.app.Notification;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Message;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.webkit.DownloadListener;
@@ -27,8 +20,6 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -37,7 +28,6 @@ import java.util.regex.Pattern;
 
 import kr.cnttech.webappbase.R;
 import kr.cnttech.webappbase.base.BaseFragment;
-import kr.cnttech.webappbase.base.BasePreLoader;
 import kr.cnttech.webappbase.lib.Const;
 import kr.cnttech.webappbase.lib.Utils;
 
@@ -68,10 +58,7 @@ public class WebViewFragment extends BaseFragment {
         WebBackForwardList webBackForwardList = webView.copyBackForwardList();
         if (webBackForwardList.getCurrentIndex() > 0) {
             String historyUrl = webBackForwardList.getItemAtIndex(webBackForwardList.getCurrentIndex() - 1).getUrl();
-            if (historyUrl.contains("/setting.asp"))
-                webView.loadUrl(getRootUrl());
-            else
-                webView.goBack();
+            webView.goBack();
         } else {
             if(getBaseActivity().getVisibleFragment() == this)
                 getBaseActivity().finish();

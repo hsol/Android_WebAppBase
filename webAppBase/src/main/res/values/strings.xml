@@ -14,7 +14,7 @@
     <string name="VER_LATEST">latest_version</string>
     <string name="BADGE_COUNT">badge_count</string>
 
-    <string name="progress_image_view">Progress image view</string>
+    <string name="when_first_load">First loaded.</string>
     <string name="splash_image_view">splash image view</string>
 
     <string name="fragment_add_complete">Fragment 추가 완료</string>

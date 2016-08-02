@@ -22,11 +22,24 @@ import kr.cnttech.webappbase.lib.Utils;
  */
 public class BaseURLConnection {
     public BaseURLConnection() {}
+    /**
+     * [BaseURLConnection] strict 모드 설정용 메소드. 메인 스레드에서 호출 시 true로 설정한다.
+     *
+     * boolean isStrict strict 모드 허용 여부
+     *
+     */
     public BaseURLConnection(boolean isStrict){
         if(isStrict)
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
     }
 
+    /**
+     * [getResponseFromHttpUrlConnection] HttpURLConnection http 통신 모듈
+     *
+     * Context context 호출될 context
+     * Utils.HttpObject httpObject 옵션 객체
+     *
+     */
     public static String getResponseFromHttpUrlConnection(Context context, Utils.HttpObject httpObject){
         try{
             URL url = new URL(httpObject.getUrlString());
@@ -88,6 +101,14 @@ public class BaseURLConnection {
         return null;
     }
 
+    /**
+     * [getQuery] Utils.Pair List를 쿼리형태로 변환
+     *
+     * List<Utils.Pair> params 파라미터 리스트
+     *
+     * return String result URL 쿼리로 변환된 파라미터
+     *
+     */
     private static String getQuery(List<Utils.Pair> params) throws UnsupportedEncodingException
     {
         StringBuilder result = new StringBuilder();
@@ -104,7 +125,6 @@ public class BaseURLConnection {
             result.append("=");
             result.append(URLEncoder.encode(pair.getValue(), "UTF-8"));
         }
-
         return result.toString();
     }
 }

@@ -39,10 +39,10 @@ import kr.cnttech.webappbase.lib.Utils;
  * Created by hansollim on 2016-07-26.
  */
 public abstract class BaseActivity extends FragmentActivity {
-    public BasePreLoader basePreLoader = null;
+    protected int baseContentView = R.layout.activity_base;
+
     protected FingerPushManager pushManager;
     protected Context mContext = null;
-    protected int baseContentView = R.layout.activity_base;
     protected abstract void onFirstLaunch();
     protected abstract void onNetworkOff();
     protected abstract void onNetworkOn();
@@ -56,9 +56,18 @@ public abstract class BaseActivity extends FragmentActivity {
         onInit();
 
         setContentView(baseContentView);
+
+        // 안드로이드 키보드 레이아웃 버그를 해결해주는 라이브러리 입니다.
         AndroidBug5497Workaround.assistActivity(this);
     }
 
+
+    /**
+     * [onInit] Activity 의 onCreate 에서 호출하는 메소드.
+     * BaseActivity 에서는 첫 실행 체크, 네트워크 체크, 스키마 체크를 기본으로 진행합니다.
+     *
+     * 호출 메소드: onFirstLaunch(), onNetworkOn(), onNetworkOff(), onScheme(Uri uri)
+     */
     public void onInit() {
         try {
             SharedPreferences pref = getSharedPreferences(getString(R.string.VER), MODE_PRIVATE);
@@ -96,6 +105,13 @@ public abstract class BaseActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * [onKeyDown] keydown 이벤트.
+     * BaseActivity 에서는 visible Fragment 로 onBackKeyDown 이벤트를 보냅니다.
+     *
+     * 호출 메소드: onBackKeyDown(Event event)
+     * return super
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -106,6 +122,13 @@ public abstract class BaseActivity extends FragmentActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    /**
+     * [getNetworkState] 네트워크 상태 반환 메소드.
+     * 데이터로 연결할 때는 mobile, wifi로 연결할 때는 wifi, 그 외는 null 을 보낸다.
+     *
+     * 호출 메소드: onBackKeyDown(Event event)
+     * return String typeName
+     */
     public String getNetworkState() {
         String typeName = null;
         ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -118,6 +141,15 @@ public abstract class BaseActivity extends FragmentActivity {
         return typeName;
     }
 
+    /**
+     * [addFragment] 프레그먼트 추가 메소드.
+     * 액티비티 프레그먼트 매니저에 새로운 프레그먼트 추가. addToBackStack 여부를 조정 가능
+     *
+     * String fragmentTag fragment 의 tag에 들어갈 문구
+     * Fragment newFragment 새로 추가될 fragment
+     * boolean isBack addToBackStack 여부
+     *
+     */
     public void addFragment(String fragmentTag, android.support.v4.app.Fragment newFragment, boolean isBack) {
         try {
             final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -132,6 +164,15 @@ public abstract class BaseActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * [replaceFragment] 프레그먼트 교체 메소드.
+     * 액티비티 프레그먼트 매니저에 visible fragment를 교체. addToBackStack 여부를 조정 가능
+     *
+     * String fragmentTag fragment 의 tag에 들어갈 문구
+     * Fragment newFragment 새로 추가될 fragment
+     * boolean isBack addToBackStack 여부
+     *
+     */
     public void replaceFragment(String fragmentTag, android.support.v4.app.Fragment newFragment, boolean isBack) {
         try {
             final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -150,6 +191,13 @@ public abstract class BaseActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * [removeFragment] 프레그먼트 삭제 메소드.
+     * 액티비티 프레그먼트 매니저에 해당하는 fragment 를 삭제
+     *
+     * String fragmentTag 삭제될 fragment 의 tag
+     *
+     */
     public void removeFragment(String fragmentTag) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
@@ -158,9 +206,29 @@ public abstract class BaseActivity extends FragmentActivity {
             transaction.commitAllowingStateLoss();
             Utils.Logger(mContext, "D", getString(R.string.fragment_remove_complete) + ":" + fragmentTag);
         }
-
     }
 
+    /**
+     * [getFragment] 프레그먼트 호출 메소드.
+     * 액티비티 프레그먼트 매니저에 해당하는 fragment 를 반환
+     *
+     * String fragmentTag 반환할 fragment 의 태그
+     * return Fragment fragment
+     *
+     */
+    public Fragment getFragment(String fragmentTag) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
+        return fragment;
+    }
+
+    /**
+     * [getVisibleFragment] 활성프레그먼트 호출 메소드.
+     * 활성화되어있는 Fragment 를 반환
+     *
+     * return Fragment topFragment 활성화된 Fragment
+     *
+     */
     public Fragment getVisibleFragment(){
         Fragment topFragment = null;
         FragmentManager fragmentManager = getSupportFragmentManager();
