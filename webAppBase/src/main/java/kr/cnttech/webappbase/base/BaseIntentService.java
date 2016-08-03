@@ -12,6 +12,7 @@ import com.fingerpush.android.FingerPushManager;
 
 import java.util.Iterator;
 
+import kr.cnttech.webappbase.R;
 import kr.cnttech.webappbase.common.MainActivity;
 import kr.cnttech.webappbase.lib.Utils;
 
@@ -42,14 +43,14 @@ public class BaseIntentService extends FingerPushListener {
     }
 
     private void setNotification(final Bundle data) {
-
         Intent intent = new Intent(BaseIntentService.this, MainActivity.class);
+        intent.putExtra(getString(R.string.boot_by_push_message), true);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
         PendingIntent pi = PendingIntent.getActivity(BaseIntentService.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         FingerNotification noti = new FingerNotification(BaseIntentService.this);
-        noti.setColor(Color.BLUE);
+        noti.setColor(Color.TRANSPARENT);
         noti.setNofiticaionIdentifier((int) System.currentTimeMillis());
         noti.showNotification(data, pi);
     }

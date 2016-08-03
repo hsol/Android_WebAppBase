@@ -36,30 +36,30 @@ public class Utils {
     private static SharedPreferences prefs;
     private static Intent intent;
 
-    public static void Logger(Context mContext, String type, String message) {
-        Logger(null, mContext, type, message);
+    public static void Logger(Context context, String type, String message) {
+        Logger(null, context, type, message);
     }
-    public static void Logger(String header, Context mContext, String type, String message) {
-        String logHead = (mContext.getString(R.string.app_name)) + ":";
+    public static void Logger(String header, Context context, String type, String message) {
+        String logHead = (context.getString(R.string.app_name)) + ":";
         header = header == null ? "" : (" " + header);
         message = message == null ? "" : message;
         switch(type) {
             case "D":
-                if(Const.isDev)
-                    Log.d(logHead + mContext.getResources().getString(R.string.log_develop) + header, message);
+                if(new Const(context).isDev())
+                    Log.d(logHead + context.getResources().getString(R.string.log_develop) + header, message);
                 break;
             case "I":
-                if(Const.isDev)
-                    Log.i(logHead + mContext.getResources().getString(R.string.log_info) + header, message);
+                if(new Const(context).isDev())
+                    Log.i(logHead + context.getResources().getString(R.string.log_info) + header, message);
                 break;
             case "E":
-                Log.e(logHead + mContext.getResources().getString(R.string.log_error) + header, message);
+                Log.e(logHead + context.getResources().getString(R.string.log_error) + header, message);
                 break;
             case "W":
-                Log.w(logHead + mContext.getResources().getString(R.string.log_warning) + header, message);
+                Log.w(logHead + context.getResources().getString(R.string.log_warning) + header, message);
                 break;
             case "V":
-                Log.v(logHead + mContext.getResources().getString(R.string.log_verbose) + header, message);
+                Log.v(logHead + context.getResources().getString(R.string.log_verbose) + header, message);
                 break;
         }
     }

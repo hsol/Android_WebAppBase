@@ -1,5 +1,6 @@
 package kr.cnttech.webappbase.base;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -13,11 +14,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
+import kr.cnttech.webappbase.lib.Const;
 import kr.cnttech.webappbase.lib.Utils;
 
 public abstract class BaseFragment extends Fragment implements OnClickListener {
     public View mView = null;
     public Context mContext = null;
+    public Const mValue = null;
 
     protected abstract int getBaseFragment();
     protected abstract void onInit();
@@ -35,6 +38,7 @@ public abstract class BaseFragment extends Fragment implements OnClickListener {
         View layout = inflater.inflate(getBaseFragment(), container, false);
         mContext = getBaseActivity().mContext;
         mView = layout;
+        mValue = getBaseActivity().mValue;
 
         onInit();
 
@@ -67,7 +71,7 @@ public abstract class BaseFragment extends Fragment implements OnClickListener {
      *
      */
     public BaseActivity getBaseActivity() {
-        return ((BaseActivity) getActivity());
+        return ((BaseActivity) (mContext != null ? (Activity) mContext : getActivity()));
     }
 
     /**

@@ -5,6 +5,20 @@
     <WebView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/webView"
-        android:layout_alignParentEnd="false" />
+        android:id="@+id/webView" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/web_preloader"
+        android:background="@android:drawable/screen_background_dark_transparent"
+        android:visibility="gone">
+
+        <pl.droidsonroids.gif.GifTextView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/preloader_fade"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
 </RelativeLayout>

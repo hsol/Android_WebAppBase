@@ -3,6 +3,9 @@
     <string name="app_prefix">cnttwebapp</string>
     <string name="app_host">base</string>
 
+    <string name="root_url">http://cntt.co.kr/</string>
+    <string name="root_url_test">http://cntt.co.kr/</string>
+
     <string name="log_develop">[Logger:D]</string>
     <string name="log_info">[Logger:I]</string>
     <string name="log_error">[Logger:E]</string>
@@ -16,11 +19,12 @@
 
     <string name="when_first_load">First loaded.</string>
     <string name="splash_image_view">splash image view</string>
+    <string name="boot_by_push_message">boot_by_push_message</string>
+
+    <string name="error_no_network">네트워크에 연결되어 있지 않습니다.</string>
 
     <string name="fragment_add_complete">Fragment 추가 완료</string>
     <string name="fragment_replace_complete">Fragment 교체 완료</string>
     <string name="fragment_remove_complete">Fragment 삭제 완료</string>
     <string name="fragment_replace_warning">Fragment 가 비어있습니다. 먼저 Fragment 를 추가해주세요</string>
-
-    <string name="error_no_network">네트워크에 연결되어 있지 않습니다.</string>
 </resources>

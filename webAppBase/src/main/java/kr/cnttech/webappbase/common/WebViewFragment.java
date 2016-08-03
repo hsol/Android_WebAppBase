@@ -11,6 +11,8 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Message;
 import android.view.KeyEvent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.webkit.DownloadListener;
@@ -28,7 +30,6 @@ import java.util.regex.Pattern;
 
 import kr.cnttech.webappbase.R;
 import kr.cnttech.webappbase.base.BaseFragment;
-import kr.cnttech.webappbase.lib.Const;
 import kr.cnttech.webappbase.lib.Utils;
 
 /**
@@ -125,6 +126,8 @@ public class WebViewFragment extends BaseFragment {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
                 Utils.Logger(mContext, "D", "onPageStarted: " + url);
+                if(mValue.isSpinnerOn())
+                    mView.findViewById(R.id.web_preloader).setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -136,6 +139,8 @@ public class WebViewFragment extends BaseFragment {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 Utils.Logger(mContext, "D", "onPageFinished: " + url);
+                if(mValue.isSpinnerOn())
+                    mView.findViewById(R.id.web_preloader).setVisibility(View.GONE);
             }
 
             @Override
@@ -209,5 +214,5 @@ public class WebViewFragment extends BaseFragment {
         return result;
     }
 
-    public String getRootUrl() { return !Const.isDev ? Const.rootUrl : Const.rootUrl_dev; }
+    public String getRootUrl() { return !mValue.isDev() ? mValue.rootUrl() : mValue.rootUrl_dev(); }
 }

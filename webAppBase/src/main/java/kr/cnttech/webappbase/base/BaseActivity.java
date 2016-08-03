@@ -3,6 +3,7 @@ package kr.cnttech.webappbase.base;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -40,9 +41,11 @@ import kr.cnttech.webappbase.lib.Utils;
  */
 public abstract class BaseActivity extends FragmentActivity {
     protected int baseContentView = R.layout.activity_base;
+    public Const mValue = null;
 
     protected FingerPushManager pushManager;
     protected Context mContext = null;
+    protected Intent mIntent = null;
     protected abstract void onFirstLaunch();
     protected abstract void onNetworkOff();
     protected abstract void onNetworkOn();
@@ -51,9 +54,13 @@ public abstract class BaseActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mValue = new Const(this);
         mContext = this;
+        mIntent = getIntent();
 
         onInit();
+
+        if(mIntent.getBooleanExtra(getString(R.string.boot_by_push_message), false)) onInitByPushMessage();
 
         setContentView(baseContentView);
 
@@ -61,6 +68,9 @@ public abstract class BaseActivity extends FragmentActivity {
         AndroidBug5497Workaround.assistActivity(this);
     }
 
+    public void onInitByPushMessage() {
+        Utils.Logger(mContext, "D", getString(R.string.boot_by_push_message));
+    }
 
     /**
      * [onInit] Activity 의 onCreate 에서 호출하는 메소드.
@@ -92,7 +102,7 @@ public abstract class BaseActivity extends FragmentActivity {
             onNetworkOff();
         } else {
             onNetworkOn();
-            if(Const.fingerPush) {
+            if(mValue.fingerPush()) {
                 pushManager = FingerPushManager.getInstance(this);
                 checkPermission();
             }

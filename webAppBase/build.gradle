@@ -32,4 +32,5 @@ dependencies {
     compile project(':fingerpush_3.0.3')
     compile 'com.android.support:appcompat-v7:24.0.0-alpha2'
     compile 'com.google.android.gms:play-services-gcm:8.4.0'
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
 }

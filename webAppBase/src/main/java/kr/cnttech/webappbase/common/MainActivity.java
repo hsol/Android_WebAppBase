@@ -24,6 +24,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onInit() {
         super.onInit();
+
     }
 
     @Override
