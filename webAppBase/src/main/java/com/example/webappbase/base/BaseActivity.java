@@ -1,14 +1,12 @@
-package kr.cnttech.webappbase.base;
+package com.example.webappbase.base;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
-import android.net.Network;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
@@ -17,9 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.View;
 import android.widget.Toast;
 
 import com.fingerpush.android.FingerPushManager;
@@ -29,12 +25,10 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-import kr.cnttech.webappbase.R;
-import kr.cnttech.webappbase.common.MainActivity;
-import kr.cnttech.webappbase.common.SplashFragment;
-import kr.cnttech.webappbase.lib.AndroidBug5497Workaround;
-import kr.cnttech.webappbase.lib.Const;
-import kr.cnttech.webappbase.lib.Utils;
+import com.example.webappbase.R;
+import com.example.webappbase.lib.AndroidBug5497Workaround;
+import com.example.webappbase.lib.Const;
+import com.example.webappbase.lib.Utils;
 
 /**
  * Created by hansollim on 2016-07-26.

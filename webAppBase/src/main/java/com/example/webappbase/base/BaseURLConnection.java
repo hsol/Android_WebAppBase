@@ -1,10 +1,7 @@
-package kr.cnttech.webappbase.base;
+package com.example.webappbase.base;
 
 import android.content.Context;
 import android.os.StrictMode;
-import android.widget.Toast;
-
-import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -15,7 +12,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 
-import kr.cnttech.webappbase.lib.Utils;
+import com.example.webappbase.lib.Utils;
 
 /**
  * Created by hansollim on 2016-05-18.
@@ -96,7 +93,7 @@ public class BaseURLConnection {
                 return response;
             }
         } catch(Exception e){
-            Toast.makeText(context, "[getJsonFromHttpUrlConnection]: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            Utils.Logger("getJsonFromHttpUrlConnection", context, "E", e.getMessage());
         }
         return null;
     }

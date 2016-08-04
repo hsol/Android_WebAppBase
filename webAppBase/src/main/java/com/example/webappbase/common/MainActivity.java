@@ -1,21 +1,11 @@
-package kr.cnttech.webappbase.common;
+package com.example.webappbase.common;
 
-import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.net.Uri;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
-import com.fingerpush.android.FingerPushManager;
-
-import kr.cnttech.webappbase.R;
-import kr.cnttech.webappbase.base.BaseActivity;
-import kr.cnttech.webappbase.lib.Const;
-import kr.cnttech.webappbase.lib.Utils;
+import com.example.webappbase.R;
+import com.example.webappbase.base.BaseActivity;
+import com.example.webappbase.lib.Utils;
 
 /**
  * Created by hansollim on 2016-07-26.

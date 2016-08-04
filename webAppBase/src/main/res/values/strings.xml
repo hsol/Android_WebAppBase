@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">CNTT WebAppBase</string>
-    <string name="app_prefix">cnttwebapp</string>
-    <string name="app_host">base</string>
+    <string name="app_name">WebAppBase</string>
+    <string name="app_prefix">webappbase</string>
+    <string name="app_host">hsol</string>
 
-    <string name="root_url">http://cntt.co.kr/</string>
-    <string name="root_url_test">http://cntt.co.kr/</string>
+    <string name="root_url">http://hsol.github.io/</string>
+    <string name="root_url_test">http://hsol.github.io/</string>
 
     <string name="log_develop">[Logger:D]</string>
     <string name="log_info">[Logger:I]</string>
@@ -20,6 +20,7 @@
     <string name="when_first_load">First loaded.</string>
     <string name="splash_image_view">splash image view</string>
     <string name="boot_by_push_message">boot_by_push_message</string>
+    <string name="finish_question">정말 종료 하시겠습니까?</string>
 
     <string name="error_no_network">네트워크에 연결되어 있지 않습니다.</string>
 

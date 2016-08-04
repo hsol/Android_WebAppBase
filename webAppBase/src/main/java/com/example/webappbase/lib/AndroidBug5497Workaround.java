@@ -1,4 +1,4 @@
-package kr.cnttech.webappbase.lib;
+package com.example.webappbase.lib;
 
 import android.app.Activity;
 import android.graphics.Rect;

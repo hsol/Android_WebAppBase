@@ -10,6 +10,6 @@
         android:layout_height="match_parent"
         android:id="@+id/splash_view_logo"
         android:contentDescription="@string/splash_image_view"
-        android:src="@drawable/cnttech"
+        android:src="@drawable/logo"
         android:layout_margin="10dp" />
 </FrameLayout>

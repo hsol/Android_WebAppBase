@@ -1,15 +1,8 @@
-package kr.cnttech.webappbase.lib;
+package com.example.webappbase.lib;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.util.Log;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import kr.cnttech.webappbase.R;
+import com.example.webappbase.R;
 
 /**
  * Created by hansollim on 2016-07-26.

@@ -1,21 +1,14 @@
-package kr.cnttech.webappbase.common;
+package com.example.webappbase.common;
 
 import android.os.AsyncTask;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
-import kr.cnttech.webappbase.R;
-import kr.cnttech.webappbase.base.BaseActivity;
-import kr.cnttech.webappbase.base.BaseFragment;
-import kr.cnttech.webappbase.base.BaseURLConnection;
-import kr.cnttech.webappbase.lib.Utils;
+import com.example.webappbase.R;
+import com.example.webappbase.base.BaseFragment;
+import com.example.webappbase.base.BaseURLConnection;
+import com.example.webappbase.lib.Utils;
 
 /**
  * Created by hansollim on 2016-07-26.

@@ -1,4 +1,4 @@
-package kr.cnttech.webappbase;
+package com.example.webappbase;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

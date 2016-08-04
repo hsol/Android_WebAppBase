@@ -1,7 +1,6 @@
-package kr.cnttech.webappbase.lib;
+package com.example.webappbase.lib;
 
 import android.Manifest;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,7 +8,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -18,16 +16,12 @@ import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.view.WindowManager;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import kr.cnttech.webappbase.R;
-import kr.cnttech.webappbase.lib.Const;
+import com.example.webappbase.R;
 
 /**
  * Created by hansollim on 2016-07-26.

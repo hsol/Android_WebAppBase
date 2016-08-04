@@ -1,4 +1,4 @@
-package kr.cnttech.webappbase.base;
+package com.example.webappbase.base;
 
 import android.app.PendingIntent;
 import android.content.Context;
@@ -12,9 +12,9 @@ import com.fingerpush.android.FingerPushManager;
 
 import java.util.Iterator;
 
-import kr.cnttech.webappbase.R;
-import kr.cnttech.webappbase.common.MainActivity;
-import kr.cnttech.webappbase.lib.Utils;
+import com.example.webappbase.R;
+import com.example.webappbase.common.MainActivity;
+import com.example.webappbase.lib.Utils;
 
 /**
  * Created by hansollim on 2016-07-28.

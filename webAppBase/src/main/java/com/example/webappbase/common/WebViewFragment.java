@@ -1,4 +1,4 @@
-package kr.cnttech.webappbase.common;
+package com.example.webappbase.common;
 
 import android.app.AlertDialog;
 import android.app.DownloadManager;
@@ -9,11 +9,9 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.Message;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.webkit.DownloadListener;
@@ -26,14 +24,12 @@ import android.webkit.WebViewClient;
 
 import java.io.File;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import kr.cnttech.webappbase.R;
-import kr.cnttech.webappbase.base.BaseFragment;
-import kr.cnttech.webappbase.lib.Utils;
+import com.example.webappbase.R;
+import com.example.webappbase.base.BaseFragment;
+import com.example.webappbase.lib.Utils;
 
 /**
  * Created by hansollim on 2016-07-26.
@@ -68,8 +64,21 @@ public class WebViewFragment extends BaseFragment {
             String historyUrl = webBackForwardList.getItemAtIndex(webBackForwardList.getCurrentIndex() - 1).getUrl();
             webView.goBack();
         } else {
-            if(getBaseActivity().getVisibleFragment() == this)
-                getBaseActivity().finish();
+            if(getBaseActivity().getVisibleFragment() == this){
+                new AlertDialog.Builder(mContext)
+                        .setIcon(R.mipmap.ic_launcher)
+                        .setTitle(getString(R.string.app_name))
+                        .setMessage(getString(R.string.finish_question))
+                        .setPositiveButton("예", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                getBaseActivity().finish();
+                            }
+                        })
+                        .setNegativeButton("아니요", null)
+                        .show();
+            }
         }
     }
 
@@ -85,15 +94,15 @@ public class WebViewFragment extends BaseFragment {
             @Override
             public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
                 String[] fnm = url.split("/");
-                String fname = fnm[fnm.length - 1]; // 파일이름
-                String fhost = fnm[2]; // 도메인
+                String fileName = fnm[fnm.length - 1]; // 파일이름
+                String fileHost = fnm[2]; // 도메인
 
                 DownloadManager mDownloadManager = (DownloadManager) mContext.getSystemService(Context.DOWNLOAD_SERVICE);
                 Uri uri = Uri.parse(url);
                 DownloadManager.Request mRequest = new DownloadManager.Request(uri);
-                mRequest.setTitle(fname);
-                mRequest.setDescription(fhost);
-                mRequest.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fname);
+                mRequest.setTitle(fileName);
+                mRequest.setDescription(fileHost);
+                mRequest.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
                 File pathExternalPublicDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
                 pathExternalPublicDir.mkdirs();
                 mRequest.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
@@ -121,7 +130,9 @@ public class WebViewFragment extends BaseFragment {
 
             @Override
             public boolean onCreateWindow(WebView view, boolean dialog, boolean userGesture, Message resultMsg) {
-                WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
+                WebView newWebView = new WebView(getContext());
+                WebView.WebViewTransport transport = (WebView.WebViewTransport)resultMsg.obj;
+                transport.setWebView(newWebView);
                 resultMsg.sendToTarget();
                 return true;
             }

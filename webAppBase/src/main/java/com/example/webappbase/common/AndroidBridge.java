@@ -1,9 +1,9 @@
-package kr.cnttech.webappbase.common;
+package com.example.webappbase.common;
 import android.content.Context;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 
-import kr.cnttech.webappbase.base.BaseBridge;
+import com.example.webappbase.base.BaseBridge;
 
 /**
  * Created by hansollim on 2016-08-04.

@@ -1,13 +1,12 @@
-package kr.cnttech.webappbase.base;
+package com.example.webappbase.base;
 
 import android.content.Context;
 import android.os.Handler;
-import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 
 import java.util.List;
 
-import kr.cnttech.webappbase.lib.Utils;
+import com.example.webappbase.lib.Utils;
 
 /**
  * Created by hansollim on 2016-08-04.

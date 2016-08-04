@@ -1,4 +1,4 @@
-package kr.cnttech.webappbase;
+package com.example.webappbase;
 
 import org.junit.Test;
 
