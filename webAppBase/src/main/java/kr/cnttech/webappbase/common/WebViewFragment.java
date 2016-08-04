@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.Message;
 import android.view.KeyEvent;
 import android.view.View;
@@ -25,6 +26,8 @@ import android.webkit.WebViewClient;
 
 import java.io.File;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,6 +40,7 @@ import kr.cnttech.webappbase.lib.Utils;
  */
 public class WebViewFragment extends BaseFragment {
     protected WebView webView = null;
+    protected AndroidBridge mBridge = null;
 
     @Override
     protected int getBaseFragment() {
@@ -47,6 +51,9 @@ public class WebViewFragment extends BaseFragment {
     protected void onInit() {
         webView = (WebView) mView.findViewById(R.id.webView);
         webViewInit(getRootUrl());
+
+        if(mValue.isDev())
+            mView.findViewById(R.id.flag_test).setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -67,10 +74,13 @@ public class WebViewFragment extends BaseFragment {
     }
 
     public void webViewInit(String urlString) {
+        mBridge = new AndroidBridge(mContext, webView);
+
         webView.setVerticalScrollBarEnabled(false);
         webView.setVerticalFadingEdgeEnabled(false);
         webView.setHorizontalScrollBarEnabled(false);
         webView.setHorizontalFadingEdgeEnabled(false);
+        webView.addJavascriptInterface(mBridge, getString(R.string.app_prefix));
         webView.setDownloadListener(new DownloadListener() {
             @Override
             public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
