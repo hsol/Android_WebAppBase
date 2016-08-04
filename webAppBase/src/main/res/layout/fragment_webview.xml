@@ -11,14 +11,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/web_preloader"
-        android:background="@android:drawable/screen_background_dark_transparent"
-        android:visibility="gone">
+        android:background="@android:drawable/screen_background_dark_transparent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="30dp"
+            android:id="@+id/web_preloader_splash"
+            android:background="@color/Azure"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/logo" />
+        </FrameLayout>
 
         <pl.droidsonroids.gif.GifTextView
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:background="@drawable/preloader_fade"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:id="@+id/web_preloader_spinner"
+            android:visibility="gone" />
 
     </FrameLayout>
 

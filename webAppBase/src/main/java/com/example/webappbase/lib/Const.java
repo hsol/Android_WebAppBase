@@ -20,5 +20,7 @@ public class Const {
     public String rootUrl() { return getString(R.string.root_url); }
     public String rootUrl_dev() { return getString(R.string.root_url_test); }
 
+    public boolean isPreloaderOn() { return getBoolean(R.bool.is_preloader_on); }
+    public boolean isSplashOn() { return getBoolean(R.bool.is_splash_on); }
     public boolean isSpinnerOn() { return getBoolean(R.bool.is_spinner_on); }
 }

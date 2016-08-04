@@ -147,8 +147,12 @@ public class WebViewFragment extends BaseFragment {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
                 Utils.Logger(mContext, "D", "onPageStarted: " + url);
-                if(mValue.isSpinnerOn())
+
+                if(mValue.isPreloaderOn())
                     mView.findViewById(R.id.web_preloader).setVisibility(View.VISIBLE);
+
+                if(mValue.isSpinnerOn())
+                    mView.findViewById(R.id.web_preloader_spinner).setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -160,8 +164,15 @@ public class WebViewFragment extends BaseFragment {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 Utils.Logger(mContext, "D", "onPageFinished: " + url);
-                if(mValue.isSpinnerOn())
+
+                if(mValue.isPreloaderOn())
                     mView.findViewById(R.id.web_preloader).setVisibility(View.GONE);
+
+                if(mValue.isSplashOn())
+                    mView.findViewById(R.id.web_preloader_splash).setVisibility(View.GONE);
+
+                if(mValue.isSpinnerOn())
+                    mView.findViewById(R.id.web_preloader_spinner).setVisibility(View.GONE);
             }
 
             @Override
@@ -188,6 +199,9 @@ public class WebViewFragment extends BaseFragment {
         cookieManager.setAcceptCookie(true);
 
         webView.loadUrl(urlString);
+
+        if(mValue.isSplashOn())
+            mView.findViewById(R.id.web_preloader_splash).setVisibility(View.VISIBLE);
     }
 
     public boolean whenUrlLoading(WebView view, String url) {
