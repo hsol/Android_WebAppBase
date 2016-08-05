@@ -1,3 +1,9 @@
+/*
+* Copyright 2016 HansolLim
+* Released under the MIT license
+* http://hsol.github.io/
+*/
+
 package com.example.webappbase.base;
 
 import android.app.Activity;

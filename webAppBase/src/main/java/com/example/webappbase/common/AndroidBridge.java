@@ -1,3 +1,9 @@
+/*
+* Copyright 2016 HansolLim
+* Released under the MIT license
+* http://hsol.github.io/
+*/
+
 package com.example.webappbase.common;
 import android.content.Context;
 import android.webkit.JavascriptInterface;

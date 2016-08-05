@@ -1,3 +1,9 @@
+/*
+* Copyright 2016 HansolLim
+* Released under the MIT license
+* http://hsol.github.io/
+*/
+
 package com.example.webappbase.base;
 
 import android.Manifest;
@@ -30,9 +36,6 @@ import com.example.webappbase.lib.AndroidBug5497Workaround;
 import com.example.webappbase.lib.Const;
 import com.example.webappbase.lib.Utils;
 
-/**
- * Created by hansollim on 2016-07-26.
- */
 public abstract class BaseActivity extends FragmentActivity {
     protected int baseContentView = R.layout.activity_base;
     public Const mValue = null;
