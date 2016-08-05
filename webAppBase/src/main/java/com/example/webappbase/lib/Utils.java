@@ -1,3 +1,9 @@
+/*
+* Copyright 2016 HansolLim
+* Released under the MIT license
+* http://hsol.github.io/
+*/
+
 package com.example.webappbase.lib;
 
 import android.Manifest;
@@ -375,5 +381,15 @@ public class Utils {
         } else {
             return Character.toUpperCase(first) + s.substring(1);
         }
+    }
+
+    /**
+     * [prefs] 글로벌 변수
+     * @param Context context 현재 컨텍스트
+     * @return SharedPreferences prefs
+     */
+    public SharedPreferences prefs(Context context) {
+        initPrefs(context);
+        return prefs;
     }
 }
