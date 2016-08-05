@@ -64,6 +64,13 @@ xml doc
 
 > 　Your test web root url.
 
+　
+
+Finger Push assets
+--------
+　FingerPush.properties
+
+　
 
 Thank you.
 
