@@ -45,6 +45,12 @@ public abstract class BaseActivity extends FragmentActivity {
     protected abstract void onNetworkOn();
     protected abstract void onScheme(Uri uri);
 
+    /**
+     * [onCreate] Activity 의 onCreate
+     * Const, Context, Intent 초기화, 푸시에 의한 호출일 경우 onInitByPushMessage 호출
+     *
+     * 호출 메소드: onInit(), onInitByPushMessage()
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -9,7 +9,18 @@ import com.example.webappbase.R;
  */
 public class Const {
     Context mContext = null;
+
+    /**
+     * 생성자
+     * @param Context 해당 컨텍스트
+     */
     public Const(Context context) { mContext = context; }
+
+    /**
+     * getResources 구현
+     * @param int id
+     * @return 각 resources value
+     */
     private int getInteger(int id) { return mContext.getResources().getInteger(id); }
     private String getString(int id) { return mContext.getResources().getString(id); }
     private boolean getBoolean(int id) { return mContext.getResources().getBoolean(id); }

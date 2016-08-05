@@ -30,9 +30,23 @@ public class Utils {
     private static SharedPreferences prefs;
     private static Intent intent;
 
+    /**
+     * [Logger] 로깅 메소드.메시지
+     * @param Context context 해당 컨텍스트
+     * @param String type 로그 타입
+     * @param String message 메시지 스트링
+     */
     public static void Logger(Context context, String type, String message) {
         Logger(null, context, type, message);
     }
+
+    /**
+     * [Logger] 헤더가 있는 로깅 메소드 오버라이드.메시지
+     * @param String header 로그 헤더 스트링
+     * @param Context context 해당 컨텍스트
+     * @param String type 로그 타입
+     * @param String message 메시지 스트링
+     */
     public static void Logger(String header, Context context, String type, String message) {
         String logHead = (context.getString(R.string.app_name)) + ":";
         header = header == null ? "" : (" " + header);
@@ -58,6 +72,9 @@ public class Utils {
         }
     }
 
+    /**
+     * [Pair] key-value 클래스
+     */
     public static class Pair{
         private String key = null;
         private String value = null;
@@ -79,6 +96,9 @@ public class Utils {
         }
     }
 
+    /**
+     * [HttpObject] HttpRequest 용 변수 클래스
+     */
     public static class HttpObject {
         private String _method = null;
         private String _urlString = null;
@@ -110,6 +130,11 @@ public class Utils {
         }
     }
 
+    /**
+     * [getPhoneNumber] 디바이스 핸드폰 번호 얻기
+     * @param Context context 해당 컨텍스트
+     * @return String phoneNumber 디바이스 핸드폰 번호
+     */
     public static String getPhoneNumber(Context context) {
         String phoneNumber = "";
         if(ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_DENIED) {
@@ -119,6 +144,11 @@ public class Utils {
         return phoneNumber;
     }
 
+    /**
+     * [getDevice] 디바이스 아이디 얻기
+     * @param Context context 해당 컨텍스트
+     * @return String deviceId 디바이스 아이디
+     */
     public static String getDeviceId(Context context) {
         String deviceId = "";
         if(ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_DENIED) {
@@ -136,24 +166,11 @@ public class Utils {
         return deviceId;
     }
 
-    public static String getDeviceShortId(Context context) {
-        String deviceId = "";
-        if(ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_DENIED) {
-            final TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-            final WifiManager wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-
-            final String tmDevice, wmMacAddr;
-
-            tmDevice = "" + tm.getDeviceId();
-            wmMacAddr = "" + wm.getConnectionInfo().getMacAddress();
-
-            UUID deviceUuid = new UUID(tmDevice.hashCode(), ((long) tmDevice.hashCode() << 32) | wmMacAddr.hashCode());
-            deviceId = deviceUuid.toString();
-            deviceId = deviceId.substring(deviceId.length() - 20);
-        }
-        return deviceId;
-    }
-
+    /**
+     * [getVersion] 앱 버전 얻기
+     * @param Context context 해당 컨텍스트
+     * @return String versionName 버전
+     */
     public static String getVersion(Context context) {
         PackageInfo pInfo = null;
         try {
@@ -165,6 +182,12 @@ public class Utils {
         return pInfo.versionName;
     }
 
+    /**
+     * [compareVersion] 버전 비교
+     * @param String localVer 로컬 앱 버전
+     * @param String latestVer 비교할 앱 버전
+     * @return bool
+     */
     public static boolean compareVersion(String localVer, String latestVer) {
         float local = Float.parseFloat(localVer);
         float latest = Float.parseFloat(latestVer);
@@ -175,6 +198,11 @@ public class Utils {
             return false;
     }
 
+    /**
+     * [getWifiConnected] 와이파이 연결상태 확인
+     * @param Context context 해당 컨텍스트
+     * @return bool 와이파이 연결 여부
+     */
     public static boolean getWifiConnected(Context context) {
         ConnectivityManager cManager;
         NetworkInfo wifi;
@@ -185,6 +213,12 @@ public class Utils {
         return wifi.isConnected() ? true : false;
     }
 
+    /**
+     * [isIntalledApp] 앱 설치 여부 확인
+     * @param Context context 해당 컨텍스트
+     * @param String packageName 앱 패키지 이름
+     * @return bool 설치여부
+     */
     private static boolean isInstalledApp(Context context, String packageName) {
         List<ApplicationInfo> appList = context.getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA);
         for (ApplicationInfo appInfo : appList) {
@@ -195,11 +229,20 @@ public class Utils {
         return false;
     }
 
+    /**
+     * [initPrefs] 내부메소드,뱃지 카운트를 위해 shared preferences 세팅
+     * @param Context context
+     */
     private static void initPrefs(Context context) {
         prefs = context.getSharedPreferences(context.getPackageName(),
                 Context.MODE_PRIVATE);
     }
 
+    /**
+     * [setIconBadgeCount] 뱃지카운트 정수 세팅
+     * @param Context context 해당 컨텍스트
+     * @param int count 뱃지 카운트
+     */
     public static void setIconBadgeCount(Context context, int count) {
         initPrefs(context);
 
@@ -237,33 +280,60 @@ public class Utils {
         context.sendBroadcast(intent);
     }
 
+    /**
+     * [getIconBadgeCount] 뱃지카운트 가져오기
+     * @param Context context 해당 컨텍스트
+     * @return int 뱃지 카운트
+     */
     public static int getIconBadgeCount(Context context) {
         initPrefs(context);
         return prefs.getInt(context.getString(R.string.BADGE_COUNT), 0);
     }
 
+    /**
+     * [addIconBadgeCount] 뱃지카운트 1 더하기
+     * @param Context context 해당 컨텍스트
+     */
     public static void addIconBadgeCount(Context context) {
         int preCount = getIconBadgeCount(context);
         setIconBadgeCount(context, preCount + 1);
     }
 
+    /**
+     * [addIconBadgeCount] 뱃지카운트 count 만큼 더하기
+     * @param Context context 해당 컨텍스트
+     * @param int count 가산 카운트
+     */
     public static void addIconBadgeCount(Context context, int count) {
         int preCount = getIconBadgeCount(context);
         setIconBadgeCount(context, preCount + count);
     }
 
+    /**
+     * [subIconBadgeCount] 뱃지카운트 1 빼기
+     * @param Context context 해당 컨텍스트
+     */
     public static void subIconBadgeCount(Context context) {
         int preCount = getIconBadgeCount(context);
         setIconBadgeCount(context, (preCount - 1 > 0 ? preCount - 1 : 0));
     }
 
+    /**
+     * [subIconBadgeCount] 뱃지 카운트 count 만큼 빼기
+     * @param Context context 해당 컨텍스트
+     * @param int count 감산 카운트
+     */
     public static void subIconBadgeCount(Context context, int count) {
         int preCount = getIconBadgeCount(context);
         setIconBadgeCount(context, (preCount - count > 0 ? preCount - count : 0));
     }
 
+    /**
+     * [getLauncherClassName] 해당하는 컨텍스트의 컴포넌트 네임 가져오기
+     * @param Context context 해당 컨텍스트
+     * @return String 컴포넌트 이름
+     */
     private static String getLauncherClassName(Context context) {
-
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
         intent.setPackage(context.getPackageName());
@@ -276,6 +346,10 @@ public class Utils {
         return "";
     }
 
+    /**
+     * [getDeviceName] 디바이스 모델명 가져오기
+     * @return String 디바이스 모델명
+     */
     public static String getDeviceName() {
         String manufacturer = Build.MANUFACTURER;
         String model = Build.MODEL;
@@ -286,6 +360,11 @@ public class Utils {
         }
     }
 
+    /**
+     * [capitalize] 영어 맨 앞 알파벳 대문자로 만들기
+     * @param String s
+     * @return String
+     */
     private static String capitalize(String s) {
         if (s == null || s.length() == 0) {
             return "";
