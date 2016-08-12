@@ -33,6 +33,7 @@ public class Const {
 
     public boolean isDev() { return getBoolean(R.bool.is_develop); }
     public boolean fingerPush() { return getBoolean(R.bool.is_contain_fingerpush); }
+    public boolean isFingerUseAuth() { return getBoolean(R.bool.is_fingerpush_use_external); }
 
     public String rootUrl() { return getString(R.string.root_url); }
     public String rootUrl_dev() { return getString(R.string.root_url_test); }

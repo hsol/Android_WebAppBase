@@ -63,8 +63,7 @@ public class Utils {
                     Log.d(logHead + context.getResources().getString(R.string.log_develop) + header, message);
                 break;
             case "I":
-                if(new Const(context).isDev())
-                    Log.i(logHead + context.getResources().getString(R.string.log_info) + header, message);
+                Log.i(logHead + context.getResources().getString(R.string.log_info) + header, message);
                 break;
             case "E":
                 Log.e(logHead + context.getResources().getString(R.string.log_error) + header, message);
