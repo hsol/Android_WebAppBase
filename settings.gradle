@@ -1,1 +1,1 @@
-include ':webAppBase', ':fingerpush_3.0.3'
+include ':webAppBase', ':fingerpush_3.0.4'
