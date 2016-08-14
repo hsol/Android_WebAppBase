@@ -2,7 +2,6 @@
 <resources>
     <bool name="is_develop">false</bool>
     <bool name="is_contain_fingerpush">false</bool>
-    <bool name="is_fingerpush_use_external">false</bool>
     <bool name="is_preloader_on">true</bool>
     <bool name="is_spinner_on">false</bool>
     <bool name="is_splash_on">true</bool>
