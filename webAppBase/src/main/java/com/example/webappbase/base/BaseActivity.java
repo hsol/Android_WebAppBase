@@ -107,7 +107,10 @@ public abstract class BaseActivity extends FragmentActivity {
             onNetworkOn();
             if(mValue.fingerPush()) {
                 pushManager = FingerPushManager.getInstance(this);
-                checkPermission();
+                if(mValue.isFingerUseAuth())
+                    checkPermission();
+                else
+                    setDevice();
             }
         }
 
@@ -139,7 +142,6 @@ public abstract class BaseActivity extends FragmentActivity {
      * [getNetworkState] 네트워크 상태 반환 메소드.
      * 데이터로 연결할 때는 mobile, wifi로 연결할 때는 wifi, 그 외는 null 을 보낸다.
      *
-     * 호출 메소드: onBackKeyDown(Event event)
      * return String typeName
      */
     public String getNetworkState() {
