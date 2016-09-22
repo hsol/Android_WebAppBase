@@ -19,10 +19,13 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -390,5 +393,40 @@ public class Utils {
     public SharedPreferences prefs(Context context) {
         initPrefs(context);
         return prefs;
+    }
+
+    public static String getUniqueId(Context context) {
+        String m_szImei = "";
+        String m_szDevIDShort = "35" +
+                Build.BOARD.length() % 10 + Build.BRAND.length() % 10 +
+                Build.CPU_ABI.length() % 10 + Build.DEVICE.length() % 10 +
+                Build.DISPLAY.length() % 10 + Build.HOST.length() % 10 +
+                Build.ID.length() % 10 + Build.MANUFACTURER.length() % 10 +
+                Build.MODEL.length() % 10 + Build.PRODUCT.length() % 10 +
+                Build.TAGS.length() % 10 + Build.TYPE.length() % 10 +
+                Build.USER.length() % 10; //13 digits
+        String m_szAndroidID = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+
+        WifiManager wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        String m_szWLANMAC = wm.getConnectionInfo().getMacAddress();
+        String m_szBTMAC = "";
+        String m_szLongID = m_szImei + m_szDevIDShort + m_szAndroidID + m_szWLANMAC + m_szBTMAC;
+        MessageDigest m = null;
+        try {
+            m = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        m.update(m_szLongID.getBytes(), 0, m_szLongID.length());
+        byte p_md5Data[] = m.digest();
+
+        String m_szUniqueID = "";
+        for (byte aP_md5Data : p_md5Data) {
+            int b = (0xFF & aP_md5Data);
+            if (b <= 0xF) m_szUniqueID += "0";
+            m_szUniqueID += Integer.toHexString(b);
+        }
+        m_szUniqueID = m_szUniqueID.toUpperCase();
+        return m_szUniqueID;
     }
 }

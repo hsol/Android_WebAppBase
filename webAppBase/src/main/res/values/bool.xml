@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <bool name="is_develop">false</bool>
+    <bool name="is_develop">true</bool>
     <bool name="is_contain_fingerpush">false</bool>
     <bool name="is_fingerpush_use_external">false</bool>
     <bool name="is_preloader_on">true</bool>
