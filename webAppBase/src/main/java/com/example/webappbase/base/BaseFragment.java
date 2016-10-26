@@ -112,11 +112,4 @@ public abstract class BaseFragment extends Fragment implements OnClickListener {
      * 물리 back 버튼 클릭 시 호출된다.
      */
     protected void onBackKeyDown(KeyEvent event) { Utils.Logger(mContext, "D", "KeyDown"); }
-
-    public class BaseAsyncTask extends AsyncTask {
-        @Override
-        protected void onPreExecute() {}
-        @Override
-        protected Object doInBackground(Object[] params) { return null; }
-    }
 }

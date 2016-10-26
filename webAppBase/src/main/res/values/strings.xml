@@ -12,6 +12,9 @@
     <string name="log_warning">[Logger:W]</string>
     <string name="log_verbose">[Logger:V]</string>
 
+    <string name="SETTINGS">app_setting</string>
+    <string name="ATTR_PUSH">push</string>
+
     <string name="VER">version_group</string>
     <string name="VER_CURRENT">current_version</string>
     <string name="VER_LATEST">latest_version</string>

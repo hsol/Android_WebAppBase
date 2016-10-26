@@ -8,6 +8,7 @@ package com.example.webappbase.base;
 
 import android.content.Context;
 import android.os.StrictMode;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -45,7 +46,15 @@ public class BaseURLConnection {
      */
     public static String getResponseFromHttpUrlConnection(Context context, Utils.HttpObject httpObject){
         try{
-            URL url = new URL(httpObject.getUrlString());
+            String params = "";
+            if(httpObject.getParams() != null) {
+                if (httpObject.getMethod().equals("GET")) {
+                    params = getQuery(httpObject.getParams());
+                }
+            }
+
+            URL url = new URL(httpObject.getUrlString() + params);
+            Utils.Logger("BaseURLConnection", context, "D", httpObject.getUrlString());
 
             HttpURLConnection conn = null;
 
@@ -61,7 +70,8 @@ public class BaseURLConnection {
 
             conn.setRequestProperty("Cache-Control", "no-cache");
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            conn.setDoOutput(true);
+
+            conn.setDoOutput(httpObject.getMethod().equals("POST"));
             conn.setDoInput(true);
 
             if(httpObject.getHeaders() != null) {
@@ -71,13 +81,17 @@ public class BaseURLConnection {
             }
 
             if(httpObject.getParams() != null) {
-                os = conn.getOutputStream();
-                //BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-                //writer.write(getQuery(params));
-                //writer.flush();
-                os.write(getQuery(httpObject.getParams()).getBytes());
-                os.flush();
-                os.close();
+                if(httpObject.getMethod().equals("POST")) {
+                    os = conn.getOutputStream();
+                    os.write(getQuery(httpObject.getParams()).getBytes());
+                    os.flush();
+                    os.close();
+
+//                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+//                    writer.write(getQuery(httpObject.getParams()));
+//                    writer.flush();
+//                    writer.close();
+                }
             }
             String response;
 
@@ -96,7 +110,11 @@ public class BaseURLConnection {
                 byteData = baos.toByteArray();
 
                 response = new String(byteData);
+                Utils.Logger("BaseURLConnection", context, "D", response);
                 return response;
+            } else {
+                Utils.Logger("BaseURLConnection", context, "D", responseCode + ": " + conn.getResponseMessage());
+                Toast.makeText(context, responseCode + ": " + conn.getResponseMessage(), Toast.LENGTH_LONG).show();
             }
         } catch(Exception e){
             Utils.Logger("getJsonFromHttpUrlConnection", context, "E", e.getMessage());

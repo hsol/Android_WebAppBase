@@ -265,7 +265,7 @@ public abstract class BaseActivity extends FragmentActivity {
             @Override
             public void onComplete(String code, String message, JSONObject jsonObject) {
                 pushManager.getInstance(mContext).setIdentity(
-                        "", // 식별자 값으로 Application 개발자가 임의 지정하여 사용한다. 예) 유저 아이디, 이메일 등
+                        Utils.getUniqueId(mContext), // 식별자 값으로 Application 개발자가 임의 지정하여 사용한다. 예) 유저 아이디, 이메일 등
                         new NetworkUtility.ObjectListener() {
                             @Override
                             public void onComplete(String code, String message, JSONObject jsonObject) {
